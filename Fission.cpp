@@ -1,4 +1,4 @@
-#include <xtensor/xview.hpp>
+#include <xtensor/views/xview.hpp>
 #include "Fission.h"
 
 namespace Fission {
@@ -197,7 +197,8 @@ namespace Fission {
                 && (!z || z == settings.sizeZ - 1);
               break;
             case Cryotheum:
-              isActive(x, y, z) = countNeighbors(Cell, x, y, z) >= 2;
+              isActive(x, y, z) = countNeighbors(Cell, x, y, z) >= 2 && 
+              countNeighbors(Moderator, x, y, z) >= 1;
           }
         }
       }

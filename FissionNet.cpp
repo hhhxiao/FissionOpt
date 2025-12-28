@@ -1,11 +1,11 @@
-#include <xtensor/xrandom.hpp>
+#include <xtensor/generators/xrandom.hpp>
 #include "FissionNet.h"
 
 namespace Fission {
   Net::Net(Opt &opt) :opt(opt), mCorrector(1), rCorrector(1), trajectoryLength(), writePos() {
     for (int i{}; i < Air; ++i)
       if (opt.settings.limit[i])
-        tileMap.emplace(i, tileMap.size());
+        tileMap.emplace(i, static_cast<int>(tileMap.size()));
     tileMap.emplace(Air, tileMap.size());
     nFeatures = static_cast<int>(tileMap.size() * 2 - 1 + nStatisticalFeatures);
     batchInput = xt::empty<double>({nMiniBatch, nFeatures});
